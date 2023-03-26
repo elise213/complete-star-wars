@@ -1,0 +1,16 @@
+p h1 {
+  text-align: center;
+}
+
+hr {
+  color: red;
+}
+
+.container {
+  margin: auto;
+}
+
+.container-card {
+  box-sizing: border-box;
+  display: inline-block;
+}
