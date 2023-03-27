@@ -67,15 +67,15 @@ export const Demo = () => {
     item &&
     Object.keys(item).length &&
     (type == "person" ? (
-      <div className="container row mx-5 px-5">
-        <div className="col-6">
+      <div className="details-container row">
+        <div className="col">
           <img
             src={`https://starwars-visualguide.com/assets/img/characters/${
               parseInt(params.index) + 1
             }.jpg`}
           />
         </div>
-        <div className="col-6">
+        <div className="col">
           <h1>{item.name}</h1>
           <p className="">
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem
@@ -97,9 +97,9 @@ export const Demo = () => {
         </div>
       </div>
     ) : type == "planet" ? (
-      <div className="container row mx-5 px-5">
-        <div className="col-6">IMAGE</div>
-        <div className="col-6">
+      <div className="details-container row">
+        <div className="col">IMAGE</div>
+        <div className="col">
           <h1>{item.name}</h1>
           <p className="">
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem
@@ -121,13 +121,13 @@ export const Demo = () => {
         </div>
       </div>
     ) : (
-      <div className="container row mx-5 px-5">
-        <div className="col-6">
+      <div className="details-container row">
+        <div className="col">
           <img
             src={`https://starwars-visualguide.com/assets/img/placeholder.jpg`}
           />{" "}
         </div>
-        <div className="col-6">
+        <div className="col">
           <h1>{item.name}</h1>
           <p className="">
             Sed ut perspiciatis unde omnis iste natus error sit voluptatem

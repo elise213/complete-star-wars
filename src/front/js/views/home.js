@@ -13,8 +13,8 @@ export const Home = () => {
   const vehicles = store.vehicles;
 
   return (
-    <div className="container">
-      <h1 className="title text-danger">Characters</h1>
+    <div className="home-container">
+      <span className="title">Characters</span>
       <div className="card-container">
         {people.map((person, idx) => {
           return (
@@ -25,7 +25,7 @@ export const Home = () => {
         })}
       </div>
 
-      <h1 className="title text-danger">Planets</h1>
+      <span className="title">Planets</span>
       <div className="card-container">
         {planets.map((planet, idx) => {
           return (
@@ -36,7 +36,7 @@ export const Home = () => {
         })}
       </div>
 
-      <h1 className="title text-danger">Vehicles</h1>
+      <span className="title">Vehicles</span>
       <div className="card-container">
         {vehicles.map((vehicle, idx) => {
           return (

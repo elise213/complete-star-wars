@@ -16,7 +16,7 @@ const Card = (props) => {
     ? props.planet.name
     : props.vehicle.name;
   let personProp = props.person && (
-    <div>
+    <div className="card-container">
       <img
         src={`https://starwars-visualguide.com/assets/img/characters/${
           props.id + 1
@@ -75,13 +75,13 @@ const Card = (props) => {
         {props.vehicle ? vehicleProp : ""}
         <div className="card-body d-flex justify-content-between">
           <Link to={typeURL + props.id}>
-            <span href="#" className="btn btn-outline-primary">
-              Learn More!
+            <span href="#" className="btn learn-more">
+              Learn More
             </span>
           </Link>
           <button
             type="button"
-            className="btn btn-outline-warning"
+            className="btn btn-liked"
             onClick={() => {
               actions.addFavorite(name);
               setLiked(!liked);

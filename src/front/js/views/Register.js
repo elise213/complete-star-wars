@@ -25,7 +25,7 @@ export const Register = () => {
   }
 
   return (
-    <div>
+    <div className="register-container">
       <div className="mb-3">
         <label for="InputEmail1" className="form-label">
           Name

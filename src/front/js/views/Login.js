@@ -11,7 +11,7 @@ export const Login = () => {
     actions.login(email, password);
   }
   return (
-    <div>
+    <div className="login-container">
       <div className="mb-3"></div>
       <div className="mb-3">
         <label for="exampleInputEmail1" className="form-label">

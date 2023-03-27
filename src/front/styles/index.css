@@ -5,3 +5,40 @@
 .card {
   width: 18rem;
 }
+
+.card-container {
+  padding-bottom: 20px;
+}
+
+.learn-more {
+  border: solid yellow;
+}
+
+.login-container,
+.register-container {
+  margin-left: 400px;
+  margin-right: 400px;
+}
+
+.navbar {
+  padding: 20px 40px 20px 40px;
+
+  background-image: url("https://imageio.forbes.com/blogs-images/startswithabang/files/2020/04/opo9601c-1200x947.jpg?format=jpg&width=960");
+}
+
+.container-card {
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.details-container {
+  margin: 30px 150px 0px 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.login-link {
+  text-decoration: none;
+  color: yellow;
+  font-size: xx-large;
+}
