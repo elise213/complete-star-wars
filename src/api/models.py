@@ -1,8 +1,4 @@
 from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
-
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.sql import func
 from sqlalchemy.dialects.postgresql import ARRAY
@@ -29,56 +25,14 @@ class User(db.Model):
             "avatar": self.avatar,
             # do not serialize the password, its a security breach
         }
-        
-class Resource(db.Model):
-        __tablename__ = "Resource"
-        id = db.Column(db.Integer, primary_key=True)
-        name = db.Column(db.String(256), unique=False, nullable=False)
-        address = db.Column(db.String(256), unique=False, nullable=True)
-        phone = db.Column(db.String(256), unique=False, nullable=True)
-        category = db.Column(db.String(256), unique=False, nullable=True)
-        website = db.Column(db.String(256), unique=False, nullable=True)
-        schedule = db.Column(db.JSON(), nullable=True)
-        description = db.Column(db.String(500), unique=False, nullable=True)
-        latitude = db.Column(db.String(250), unique=False, nullable=True)
-        longitude = db.Column(db.String(250), unique=False, nullable=True)
-        image = db.Column(db.String(500), unique=False, nullable=True)
-        image2 = db.Column(db.String(500), unique=False, nullable=True)
-        logo = db.Column(db.String(500), unique=False, nullable=True)
-        icon = db.Column(db.String(250), unique=False, nullable=True)
-        user_id = db.Column(db.Integer, unique=False, nullable=True)
-        comment= db.relationship("Comment", backref="resource", lazy=True)
-        def __repr__(self):
-            return f'<Resource {self.name}>'
-        def serialize(self):
-            schedule = json.loads(self.schedule.replace("'", "\""))
-            schedule_string = json.dumps(schedule)
-            return {
-                "id": self.id,
-                "name": self.name,
-                "address": self.address,
-                "phone": self.phone,
-                "website": self.website,
-                "schedule" : schedule,
-                "description" : self.description,
-                "category" : self.category,
-                "website" : self.website,
-                "image" : self.image,
-                "image2" : self.image2,
-                "logo" : self.logo,
-                "icon" : self.icon,
-                "user_id" : self.user_id,
-                "latitude" : self.latitude,
-                "longitude" : self.longitude
-                # do not serialize the password, its a security breach
-            }
-    
 
 class Favorites(db.Model):
     __tablename__ = 'Favorites'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256))
     userId = db.Column(db.Integer, nullable=False)
+    typeURL=db.Column(db.String(256))
+    index=db.Column(db.Integer)
     
     def __repr__(self):
         return f'<Favorites {self.id}>'
@@ -88,4 +42,6 @@ class Favorites(db.Model):
             "id": self.id,
             "name": self.name,
             "userId": self.userId,
+            "typeURL": self.typeURL,
+            "index": self.index
         }

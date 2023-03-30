@@ -12,7 +12,7 @@
 
 .title {
   padding: 40px 0px 40px 25px;
-  color: yellow;
+  color: #ffe082;
   font-size: xx-large;
 }
 
@@ -20,6 +20,7 @@
   overflow-x: scroll;
   white-space: nowrap;
   margin-bottom: 30px;
+  margin-top: 20px;
 }
 
 .my-card {

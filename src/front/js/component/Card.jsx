@@ -1,10 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 const Card = (props) => {
   const { store, actions } = useContext(Context);
   const [liked, setLiked] = useState(false);
+
+
   let typeURL = props.person
     ? "/component/person/"
     : props.planet
@@ -15,8 +17,15 @@ const Card = (props) => {
     : props.planet
     ? props.planet.name
     : props.vehicle.name;
+  useEffect(()=> {
+      store.favorites.forEach((fave)=> {
+        if (fave.name == name) {
+          setLiked(true);
+        }
+      } )
+    },[])
   let personProp = props.person && (
-    <div className="card-container">
+    <div>
       <img
         src={`https://starwars-visualguide.com/assets/img/characters/${
           props.id + 1
@@ -27,9 +36,6 @@ const Card = (props) => {
       <div className="card-body">
         <h5 className="card-title">{props.person.name}</h5>
       </div>
-      <li className="list-group-item border-0">{props.person.gender}</li>
-      <li className="list-group-item border-0">{props.person.hair_color}</li>
-      <li className="list-group-item border-0">{props.person.eye_color}</li>
     </div>
   );
 
@@ -45,9 +51,7 @@ const Card = (props) => {
       <div className="card-body">
         <h5 className="card-title">{props.planet.name}</h5>
       </div>
-      <li className="list-group-item border-0">{props.planet.gravity}</li>
-      <li className="list-group-item border-0">{props.planet.climate}</li>
-      <li className="list-group-item border-0">{props.planet.terrain}</li>
+
     </div>
   );
 
@@ -61,9 +65,6 @@ const Card = (props) => {
       <div className="card-body">
         <h5 className="card-title">{props.vehicle.name}</h5>
       </div>
-      <li className="list-group-item border-0">{props.vehicle.model}</li>
-      <li className="list-group-item border-0">{props.vehicle.crew}</li>
-      <li className="list-group-item border-0">{props.vehicle.pilots}</li>
     </div>
   );
 
@@ -75,19 +76,22 @@ const Card = (props) => {
         {props.vehicle ? vehicleProp : ""}
         <div className="card-body d-flex justify-content-between">
           <Link to={typeURL + props.id}>
-            <span href="#" className="btn learn-more">
+            <button href="#" className="custom-button">
               Learn More
-            </span>
+            </button>
           </Link>
           <button
             type="button"
             className="btn btn-liked"
             onClick={() => {
-              actions.addFavorite(name);
+              actions.addFavorite(name, typeURL, props.id);
               setLiked(!liked);
             }}
           >
-            <i className={`${liked ? "fas" : "far"} fa-heart`}></i>
+            <i
+              className={`heart ${liked ? "fas" : "far"} fa-heart`}
+              style={{ color: "lightgreen", fontSize: "x-large" }}
+            ></i>
           </button>
         </div>
       </div>

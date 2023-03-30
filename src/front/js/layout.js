@@ -9,7 +9,7 @@ import { Single } from "./views/single";
 import { Navbar } from "./component/navbar";
 // import { Footer } from "./component/footer";
 
-import { UserProfile } from "./views/UserProfile";
+import UserProfile from "./views/UserProfile";
 import { Login } from "./views/Login";
 import { Register } from "./views/Register";
 

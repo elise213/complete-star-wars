@@ -14,6 +14,7 @@ export const Demo = () => {
       ? "planet"
       : "vehicle"
   );
+  const [isFavorite, setIsFavorite] = useState(false)
 
   useEffect(() => {
     // actions.loadSomeData();
@@ -61,6 +62,17 @@ export const Demo = () => {
         });
     }
   }, [type]);
+      
+  useEffect(()=> {
+      store.favorites.forEach((fave)=> {
+        if (fave.name == item.name) {
+          setIsFavorite(true);
+        }
+        console.log("is favorite", isFavorite);
+        console.log(fave.name, item)
+      } )
+    },[item]);
+
   console.log(params);
   console.log(item);
   let fields =
@@ -68,86 +80,130 @@ export const Demo = () => {
     Object.keys(item).length &&
     (type == "person" ? (
       <div className="details-container row">
+        <div className="col details-header">
+          <p className="details-title">{item.name}</p>
+          
+         {isFavorite == false ?
+          <button className="custom-button"
+              onClick={() => {
+                actions.addFavorite(item.name, "/component/person", params.index)}}
+          > 
+            Add {item.name} To My Favorites
+          </button> : null
+}
+        </div>
         <div className="col">
           <img
+            className="details-image"
             src={`https://starwars-visualguide.com/assets/img/characters/${
               parseInt(params.index) + 1
             }.jpg`}
           />
         </div>
-        <div className="col">
-          <h1>{item.name}</h1>
-          <p className="">
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-            quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt explicabo. Nemo enim ipsam voluptatem quin voluptas sit
-            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-            eos qui ratione voluptatem sequi
-          </p>
-        </div>
+
         <hr />
-        <div className="row">
-          <div className="col-2 text-danger">{item.name}</div>
-          <div className="col-2 text-danger">{item.birth_year}</div>
-          <div className="col-2 text-danger">{item.gender}</div>
-          <div className="col-2 text-danger">{item.height}</div>
-          <div className="col-2 text-danger">{item.skin_color}</div>
-          <div className="col-2 text-danger">{item.eye_color}</div>
+        <div className="row justify-content-between">
+          <div className="col-2">
+            <p className="heading">Birth Year:</p>
+            <p className="info">{item.birth_year}</p>
+          </div>
+          <div className="col-2">
+            <p className="heading">Gender:</p>
+            <p className="info">{item.gender}</p>
+          </div>
+
+          <div className="col-2">
+            <p className="heading">Height:</p>
+            <p className="info">{item.height}</p>
+          </div>
+
+          <div className="col-2">
+            <p className="heading">Eye Color:</p>
+            <p className="info">{item.eye_color}</p>
+          </div>
         </div>
       </div>
     ) : type == "planet" ? (
       <div className="details-container row">
-        <div className="col">IMAGE</div>
         <div className="col">
-          <h1>{item.name}</h1>
-          <p className="">
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-            quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt explicabo. Nemo enim ipsam voluptatem quin voluptas sit
-            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-            eos qui ratione voluptatem sequi
-          </p>
+          <p className="details-title">{item.name}</p>
+          {isFavorite == false ?
+          <button className="custom-button"
+                      onClick={() => {
+                        actions.addFavorite(item.name, "/component/planet", params.index)}}
+          >
+            Add {item.name} To My Favorites
+          </button>
+          : null
+}
+        </div>
+        <div className="col">
+          <img
+            className="details-image"
+            src={`https://starwars-visualguide.com/assets/img/planets/${
+              parseInt(params.index) + 2
+            }.jpg`}
+          />
         </div>
         <hr />
-        <div className="row">
-          <div className="col-2 text-danger">{item.name}</div>
-          <div className="col-2 text-danger">{item.orbit}</div>
-          <div className="col-2 text-danger">{item.gravity}</div>
-          <div className="col-2 text-danger">{item.terrain}</div>
-          <div className="col-2 text-danger">{item.surface_water}</div>
-          <div className="col-2 text-danger">{item.population}</div>
+        <div className="row justify-content-between">
+          <div className="col-2">
+            <p className="heading">Gravity:</p>
+            <p className="info">{item.gravity}</p>
+          </div>
+
+          <div className="col-2">
+            <p className="heading">Terrain:</p>
+            <p className="info">{item.terrain}</p>
+          </div>
+
+          <div className="col-2">
+            <p className="heading">Surface Water:</p>
+            <p className="info"> {item.surface_water}</p>
+          </div>
+
+          <div className="col-2">
+            <p className="heading">Population:</p>
+            <p className="info">{item.population}</p>
+          </div>
         </div>
       </div>
     ) : (
       <div className="details-container row">
         <div className="col">
-          <img
-            src={`https://starwars-visualguide.com/assets/img/placeholder.jpg`}
-          />{" "}
+          <p className="details-title">{item.name}</p>
+          {isFavorite == false ?
+          <button className="custom-button"
+                                onClick={() => {
+                                  actions.addFavorite(item.name, "/component/vehicle", params.index)}}
+          >
+            Add {item.name} To My Favorites
+          </button>
+          : null }
         </div>
         <div className="col">
-          <h1>{item.name}</h1>
-          <p className="">
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-            quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt explicabo. Nemo enim ipsam voluptatem quin voluptas sit
-            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-            eos qui ratione voluptatem sequi
-          </p>
+          <img
+            className="details-image"
+            src={`https://starwars-visualguide.com/assets/img/starships/${
+              parseInt(params.index) + 1
+            }.jpg`}
+          />
         </div>
         <hr />
-        <div className="row">
-          <div className="col-2 text-danger">{item.name}</div>
-          <div className="col-2 text-danger">{item.crew}</div>
-          <div className="col-2 text-danger">{item.passengers}</div>
-          <div className="col-2 text-danger">{item.consumables}</div>
-          <div className="col-2 text-danger">{item.starship_class}</div>
-          <div className="col-2 text-danger">{item.cargo_capacity}</div>
+        <div className="row justify-content-between">
+          <p className="heading">Crew:</p>
+          <div className="col-2">{item.crew}</div>
+          <p className="heading">Passengers:</p>
+          <div className="col-2">{item.passengers}</div>
+          <p className="heading">Consumables:</p>
+          <div className="col-2">{item.consumables}</div>
+          <p className="heading">Starship Class:</p>
+          <div className="col-2">{item.starship_class}</div>
+          <p className="heading">Cargo Capacity:</p>
+          <div className="col-2">{item.cargo_capacity}</div>
         </div>
       </div>
     ));
-  return <div>{fields}</div>;
+
+  return <div className="details-page">{fields}</div>;
 };

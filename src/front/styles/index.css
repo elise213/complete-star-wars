@@ -10,8 +10,61 @@
   padding-bottom: 20px;
 }
 
-.learn-more {
-  border: solid yellow;
+.form-control {
+  margin-bottom: 20px;
+}
+
+.avatarImages {
+  font-size: x-large;
+  padding-right: 15px;
+}
+
+.avatarImages:hover,
+.avatarImageSelected {
+  font-size: xx-large;
+  color: lightgreen;
+}
+
+.fa-circle-user {
+  font-size: xx-large;
+  color: #ffe082;
+}
+.logged-in {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+
+}
+
+.button-back-container,
+.submit-account,
+.avatar-submit {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.back {
+  color: black;
+  text-decoration: none;
+}
+.back:hover {
+  color: lightgreen;
+}
+
+.custom-button {
+  border: solid #ffe082;
+  background-color: lightgreen;
+  color: black;
+  border-radius: 3px;
+  max-height: 50px;
+  font-size: large;
+  margin-top: 20px;
+}
+.custom-button:hover {
+  background-color: #ffe082;
+  color: lightgreen;
+  border: solid lightgreen;
 }
 
 .login-container,
@@ -22,7 +75,7 @@
 
 .navbar {
   padding: 20px 40px 20px 40px;
-
+  border-bottom: 1px solid lightgreen;
   background-image: url("https://imageio.forbes.com/blogs-images/startswithabang/files/2020/04/opo9601c-1200x947.jpg?format=jpg&width=960");
 }
 
@@ -30,15 +83,44 @@
   box-sizing: border-box;
   display: inline-block;
 }
+.details-header {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+.info {
+  color: lightgreen;
+}
+
+.details-title {
+  color: #ffe082;
+  font-size: xx-large;
+}
 
 .details-container {
-  margin: 30px 150px 0px 150px;
+  padding: 30px 150px 0px 150px;
   display: flex;
   justify-content: center;
+}
+.details-page {
+  background-color: black;
+  /* height: 100%; */
+  height: 100svh;
 }
 
 .login-link {
   text-decoration: none;
-  color: yellow;
+  color: #ffe082;
   font-size: xx-large;
+}
+
+.details-image {
+  border-radius: 3px;
+  border: 3px solid #ffe082;
+  margin-bottom: 10px;
+}
+
+.heading {
+  color: red;
 }

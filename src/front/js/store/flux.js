@@ -3,35 +3,22 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       message: null,
       current_front_url:
-        "https://3000-4geeksacade-reactflaskh-fxbn4n58cbg.ws-us92.gitpod.io",
+        "https://3000-lalafontain-completesta-t15o0v2yqxu.ws-eu93.gitpod.io",
       current_back_url: process.env.BACKEND_URL,
-      demo: [
-        {
-          title: "FIRST",
-          background: "white",
-          initial: "white",
-        },
-        {
-          title: "SECOND",
-          background: "white",
-          initial: "white",
-        },
-      ],
       people: [],
       vehicles: [],
       planets: [],
       favorites: [],
       name: null,
       token: null,
-
       avatarID: null,
       avatarImages: [
-        "fas fa-robot",
         "fas fa-user-astronaut",
-        "fas fa-user-ninja",
-        "fas fa-snowman",
-        "fas fa-user-secret",
-        "fas fa-hippo",
+        "fas fa-space-shuttle",
+        "fas fa-satellite",
+        "fas fa-meteor",
+        "fab fa-jedi-order",
+        "fas fa-robot",
       ],
     },
     actions: {
@@ -61,9 +48,58 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(error, "occurred at my fetch");
           });
       },
+
+      login: async (email, password) => {
+        const current_back_url = getStore().current_back_url;
+        const opts = {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        };
+        try {
+          const response = await fetch(current_back_url + "/api/login", opts);
+          if (response.status !== 200) {
+            alert("There has been an error");
+            return false;
+          }
+          const data = await response.json();
+          // console.log("data =", data);
+          sessionStorage.setItem("token", data.access_token);
+          sessionStorage.setItem("name", data.name);
+          let favoriteNames = [];
+          data.favorites.forEach((favorite) => {
+            favoriteNames.push(favorite);
+          });
+          console.log("from login", data.favorites[0].name);
+          setStore({
+            token: data.access_token,
+            avatarID: data.avatar,
+            name: data.name,
+            favorites: favoriteNames,
+          });
+          // console.log("AVATAR ID", getStore().avatarID);
+          return true;
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      logout: () => {
+        const current_front_url = getStore().current_front_url;
+        const token = sessionStorage.removeItem("token");
+        const name = sessionStorage.removeItem("name");
+        setStore({ token: null, name: null });
+        window.location.href = current_front_url + "/";
+      },
+
       getPerson: (index) => {
         const person = getStore().people;
-        console.log("person from flux", person);
         return person[index];
       },
 
@@ -77,16 +113,68 @@ const getState = ({ getStore, getActions, setStore }) => {
         return vehicle[index];
       },
 
-      deleteFavorite: (index) => {
+      removeFavorite: (faveName) => {
+        const current_back_url = getStore().current_back_url;
         const favorites = getStore().favorites;
-        let filtered = favorites.filter((f, i) => i !== index);
-        setStore({ favorites: filtered });
+        const token = getStore().token;
+        if (sessionStorage.getItem("token")) {
+          const opts = {
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+            method: "DELETE",
+            body: JSON.stringify({
+              name: faveName,
+            }),
+          };
+          fetch(current_back_url + "/api/removeFavorite", opts)
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.message == "okay") {
+                favorites.forEach((element, index) => {
+                  if (element.name == faveName) {
+                    favorites.splice(index, 1);
+                  }
+                });
+                setStore({ favorites: favorites });
+              }
+            })
+            .catch((error) => console.log(error));
+        }
       },
 
-      addFavorite: (name) => {
-        const favorite = getStore().favorites;
-        favorite.push(name);
-        setStore({ favorites: favorite });
+      addFavorite: (name, typeURL, id) => {
+        const current_back_url = getStore().current_back_url;
+        const favorites = getStore().favorites;
+        const token = sessionStorage.getItem("token");
+        let favorite = {
+          "name": name,
+          "typeURL": typeURL,
+          "index": id
+      }
+        if (sessionStorage.getItem("token")) {
+          const opts = {
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({
+              name: name,
+              typeURL: typeURL,
+              index: id
+            }),
+          };
+          fetch(current_back_url + "/api/addFavorite", opts)
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.message == "okay") {
+                favorites.push(favorite);
+                setStore({ favorites: favorites });
+              }
+            });
+        }
       },
 
       // Use getActions to call a function within a fuction
@@ -94,18 +182,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().changeColor(0, "green");
       },
 
-      getMessage: async () => {
-        try {
-          // fetching data from the backend
-          const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
-          const data = await resp.json();
-          setStore({ message: data.message });
-          // don't forget to return something, that is how the async resolves
-          return data;
-        } catch (error) {
-          console.log("Error loading message from backend", error);
-        }
-      },
+      // getMessage: async () => {
+      //   try {
+      //     // fetching data from the backend
+      //     const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
+      //     const data = await resp.json();
+      //     setStore({ message: data.message });
+      //     // don't forget to return something, that is how the async resolves
+      //     return data;
+      //   } catch (error) {
+      //     console.log("Error loading message from backend", error);
+      //   }
+      // },
       changeColor: (index, color) => {
         //get the store
         const store = getStore();
@@ -119,6 +207,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         //reset the global store
         setStore({ demo: demo });
+      },
+      createUser: async (name, email, password, userAvatar) => {
+        const current_back_url = getStore().current_back_url;
+        const current_front_url = getStore().current_front_url;
+        const opts = {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            password: password,
+            userAvatar: userAvatar,
+          }),
+        };
+        try {
+          const response = await fetch(
+            current_back_url + "/api/createUser",
+            opts
+          );
+          if (response.status >= 400) {
+            alert("There has been an error");
+            return false;
+          }
+          const data = await response.json();
+          if (data.status == "true") {
+            console.log("relocate!!");
+            window.location.href = current_front_url + "/login";
+          }
+          return true;
+        } catch (error) {
+          console.error(error);
+        }
       },
     },
   };

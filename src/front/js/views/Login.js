@@ -1,10 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export const Login = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    sessionStorage.getItem("token") ? navigate("/") : "";
+  }, [handleLogin]);
 
   function handleLogin(e) {
     e.preventDefault();
@@ -12,8 +16,8 @@ export const Login = () => {
   }
   return (
     <div className="login-container">
-      <div className="mb-3"></div>
-      <div className="mb-3">
+      <div className="m"></div>
+      <div className="">
         <label for="exampleInputEmail1" className="form-label">
           Email
         </label>
@@ -30,6 +34,7 @@ export const Login = () => {
         <label for="exampleInputPassword1" className="form-label">
           Password
         </label>
+
         <input
           type="password"
           className="form-control"
@@ -37,7 +42,12 @@ export const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        <Link to="/register">Don't have an account?</Link>
+        <div className="button-back-container">
+          <button className=" custom-button" onClick={(e) => handleLogin(e)}>
+            Submit
+          </button>
+          <Link to="/register">Don't have an account?</Link>
+        </div>
       </div>
     </div>
   );

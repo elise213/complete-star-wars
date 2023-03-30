@@ -11,9 +11,9 @@ export const Register = () => {
 
   function handleRegister(e) {
     e.preventDefault();
-    actions.createUser(is_org, name, email, password, userAvatar);
-    setLog(true);
+    actions.createUser(name, email, password, userAvatar);
   }
+
   function handleSelectImage(id) {
     store.avatarImages.forEach((i, idx) => {
       let img = document.querySelector(`#avatar${idx}`);
@@ -39,7 +39,7 @@ export const Register = () => {
           onChange={(e) => setName(e.target.value)}
         ></input>
       </div>
-      <div className="mb-3">
+      <div className="">
         <label for="InputEmail1" className="form-label">
           Email
         </label>
@@ -52,7 +52,7 @@ export const Register = () => {
           onChange={(e) => setEmail(e.target.value)}
         ></input>
       </div>
-      <div className="mb-3">
+      <div className="">
         <label for="InputPassword1" className="form-label">
           Password
         </label>
@@ -63,10 +63,9 @@ export const Register = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        <Link to="/register">Don't have an account?</Link>
       </div>
-      <div className="mb-3">
-        <p>pick your avatar</p>
+      <div className="">
+        <p>Pick Your Avatar</p>
         {store.avatarImages.map((i, idx) => {
           return (
             <span
@@ -77,18 +76,18 @@ export const Register = () => {
           );
         })}
       </div>
-      <div style={{ width: "100%", textAlign: "center", height: "3rem" }}>
-        <a className="" onClick={() => setLog(true)}>
-          Go Back to login
-        </a>
+      <div className="button-back-container">
+        <button
+          type="submit"
+          className="custom-button"
+          onClick={(e) => handleRegister(e)}
+        >
+          Register
+        </button>
+        <Link className="back" to="/login">
+          Back to Login
+        </Link>
       </div>
-      <button
-        type="submit"
-        className="btn btn-primary"
-        onClick={(e) => handleRegister(e)}
-      >
-        Register
-      </button>
     </div>
   );
 };
