@@ -36,7 +36,7 @@ export const Home = () => {
         })}
       </div>
 
-      <span className="title">Vehicles</span>
+      {/* <span className="title">Vehicles</span>
       <div className="card-container">
         {vehicles.map((vehicle, idx) => {
           return (
@@ -45,7 +45,7 @@ export const Home = () => {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -7,6 +7,7 @@ export const Demo = () => {
   const { store, actions } = useContext(Context);
   const params = useParams();
   const [item, setItem] = useState({});
+  const token = sessionStorage.getItem("token");
   const [type, setType] = useState(
     window.location.href.includes("person")
       ? "person"
@@ -89,7 +90,7 @@ export const Demo = () => {
         <div className="col details-header">
           <p className="details-title">{item.name}</p>
 
-          {isFavorite == false ? (
+          {token && isFavorite == false ? (
             <button
               className="custom-button"
               onClick={() => {
@@ -103,14 +104,14 @@ export const Demo = () => {
             >
               Add {item.name} To My Favorites
             </button>
-          ) : (
+          ) : token ? (
             <button
               className="custom-button"
               onClick={(e) => handleClick(e, item.name)}
             >
               Remove {item.name} From My Favorites
             </button>
-          )}
+          ) : null}
         </div>
         <div className="col">
           <img
@@ -147,7 +148,7 @@ export const Demo = () => {
       <div className="details-container row">
         <div className="col">
           <p className="details-title">{item.name}</p>
-          {isFavorite == false ? (
+          {token && isFavorite == false ? (
             <button
               className="custom-button"
               onClick={() => {
@@ -161,14 +162,14 @@ export const Demo = () => {
             >
               Add {item.name} To My Favorites
             </button>
-          ) : (
+          ) : token ? (
             <button
               className="custom-button"
               onClick={(e) => handleClick(e, item.name)}
             >
               Remove {item.name} From My Favorites
             </button>
-          )}
+          ) : null}
         </div>
         <div className="col">
           <img
@@ -205,7 +206,7 @@ export const Demo = () => {
       <div className="details-container row">
         <div className="col">
           <p className="details-title">{item.name}</p>
-          {isFavorite == false ? (
+          {token && isFavorite == false ? (
             <button
               className="custom-button"
               onClick={() => {
@@ -219,14 +220,14 @@ export const Demo = () => {
             >
               Add {item.name} To My Favorites
             </button>
-          ) : (
+          ) : token ? (
             <button
               className="custom-button"
               onClick={(e) => handleClick(e, item.name)}
             >
               Remove {item.name} From My Favorites
             </button>
-          )}
+          ) : null}
         </div>
         <div className="col">
           <img
@@ -238,16 +239,26 @@ export const Demo = () => {
         </div>
         <hr />
         <div className="row justify-content-between">
-          <p className="heading">Crew:</p>
-          <div className="col-2">{item.crew}</div>
-          <p className="heading">Passengers:</p>
-          <div className="col-2">{item.passengers}</div>
-          <p className="heading">Consumables:</p>
-          <div className="col-2">{item.consumables}</div>
-          <p className="heading">Starship Class:</p>
-          <div className="col-2">{item.starship_class}</div>
-          <p className="heading">Cargo Capacity:</p>
-          <div className="col-2">{item.cargo_capacity}</div>
+          <div className="col-2">
+            <p className="heading">Crew:</p>
+            <p className="info">{item.crew}</p>
+          </div>
+          <div className="col-2">
+            <p className="heading">Passengers:</p>
+            <p className="info">{item.passengers}</p>
+          </div>
+          <div className="col-2">
+            <p className="heading">Consumables:</p>
+            <p className="info">{item.consumables}</p>
+          </div>
+          <div className="col-2">
+            <p className="heading">Starship Class:</p>
+            <p className="info">{item.starship_class}</p>
+          </div>
+          <div className="col-2">
+            <p className="heading">Cargo Capacity:</p>
+            <p className="info">{item.cargo_capacity}</p>
+          </div>
         </div>
       </div>
     ));
