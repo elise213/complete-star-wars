@@ -10,6 +10,10 @@
   padding-bottom: 20px;
 }
 
+.profile-container {
+  background-color: black;
+}
+
 .form-control {
   margin-bottom: 20px;
 }
@@ -17,6 +21,7 @@
 .avatarImages {
   font-size: x-large;
   padding-right: 15px;
+  color: #ffe082;
 }
 
 .avatarImages:hover,
@@ -25,17 +30,60 @@
   color: lightgreen;
 }
 
-.fa-circle-user {
+.yellow-text {
+  color: #ffe082;
+  text-decoration: none;
+  font-size: x-large;
+}
+.yellow-text-title {
+  color: #ffe082;
+  font-size: xx-large;
+  margin-top: 20px;
+  text-decoration: underline;
+}
+.profile-container {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30px;
+}
+.links:hover {
+  color: lightgreen;
+}
+.delete-favorite {
+  color: grey;
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: xx-large;
+}
+.delete-favorite:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.h-100 {
+  height: 100svh;
+  background-color: black;
+}
+.profile-icon {
   font-size: xx-large;
   color: #ffe082;
+}
+.profile-icon:hover {
+  color: lightgreen;
 }
 .logged-in {
   justify-content: center;
   display: flex;
   align-items: center;
-
 }
-
+.form-label {
+  color: #ffe082;
+}
+.navbar {
+  margin-bottom: 30px;
+}
 .button-back-container,
 .submit-account,
 .avatar-submit {
@@ -113,6 +161,9 @@
   text-decoration: none;
   color: #ffe082;
   font-size: xx-large;
+}
+.login-link:hover {
+  color: lightgreen;
 }
 
 .details-image {

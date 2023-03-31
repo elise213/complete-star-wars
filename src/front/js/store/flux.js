@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       message: null,
       current_front_url:
-        "https://3000-lalafontain-completesta-t15o0v2yqxu.ws-eu93.gitpod.io",
+        "https://3000-lalafontain-completesta-8ppq60m9gxp.ws-eu93.gitpod.io",
       current_back_url: process.env.BACKEND_URL,
       people: [],
       vehicles: [],
@@ -77,14 +77,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           data.favorites.forEach((favorite) => {
             favoriteNames.push(favorite);
           });
-          console.log("from login", data.favorites[0].name);
+
           setStore({
             token: data.access_token,
             avatarID: data.avatar,
             name: data.name,
             favorites: favoriteNames,
           });
-          // console.log("AVATAR ID", getStore().avatarID);
           return true;
         } catch (error) {
           console.error(error);
@@ -149,10 +148,10 @@ const getState = ({ getStore, getActions, setStore }) => {
         const favorites = getStore().favorites;
         const token = sessionStorage.getItem("token");
         let favorite = {
-          "name": name,
-          "typeURL": typeURL,
-          "index": id
-      }
+          name: name,
+          typeURL: typeURL,
+          index: id,
+        };
         if (sessionStorage.getItem("token")) {
           const opts = {
             headers: {
@@ -163,7 +162,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             body: JSON.stringify({
               name: name,
               typeURL: typeURL,
-              index: id
+              index: id,
             }),
           };
           fetch(current_back_url + "/api/addFavorite", opts)

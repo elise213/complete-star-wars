@@ -65,7 +65,7 @@ export const Register = () => {
         ></input>
       </div>
       <div className="">
-        <p>Pick Your Avatar</p>
+        <p className="form-label">Pick Your Avatar</p>
         {store.avatarImages.map((i, idx) => {
           return (
             <span

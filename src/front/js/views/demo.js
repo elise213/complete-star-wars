@@ -14,7 +14,7 @@ export const Demo = () => {
       ? "planet"
       : "vehicle"
   );
-  const [isFavorite, setIsFavorite] = useState(false)
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     // actions.loadSomeData();
@@ -62,16 +62,16 @@ export const Demo = () => {
         });
     }
   }, [type]);
-      
-  useEffect(()=> {
-      store.favorites.forEach((fave)=> {
-        if (fave.name == item.name) {
-          setIsFavorite(true);
-        }
-        console.log("is favorite", isFavorite);
-        console.log(fave.name, item)
-      } )
-    },[item]);
+
+  useEffect(() => {
+    store.favorites.forEach((fave) => {
+      if (fave.name == item.name) {
+        setIsFavorite(true);
+      }
+      console.log("is favorite", isFavorite);
+      console.log(fave.name, item);
+    });
+  }, [item]);
 
   console.log(params);
   console.log(item);
@@ -82,15 +82,21 @@ export const Demo = () => {
       <div className="details-container row">
         <div className="col details-header">
           <p className="details-title">{item.name}</p>
-          
-         {isFavorite == false ?
-          <button className="custom-button"
+
+          {isFavorite == false ? (
+            <button
+              className="custom-button"
               onClick={() => {
-                actions.addFavorite(item.name, "/component/person", params.index)}}
-          > 
-            Add {item.name} To My Favorites
-          </button> : null
-}
+                actions.addFavorite(
+                  item.name,
+                  "/component/person",
+                  params.index
+                );
+              }}
+            >
+              Add {item.name} To My Favorites
+            </button>
+          ) : null}
         </div>
         <div className="col">
           <img
@@ -127,15 +133,20 @@ export const Demo = () => {
       <div className="details-container row">
         <div className="col">
           <p className="details-title">{item.name}</p>
-          {isFavorite == false ?
-          <button className="custom-button"
-                      onClick={() => {
-                        actions.addFavorite(item.name, "/component/planet", params.index)}}
-          >
-            Add {item.name} To My Favorites
-          </button>
-          : null
-}
+          {isFavorite == false ? (
+            <button
+              className="custom-button"
+              onClick={() => {
+                actions.addFavorite(
+                  item.name,
+                  "/component/planet",
+                  params.index
+                );
+              }}
+            >
+              Add {item.name} To My Favorites
+            </button>
+          ) : null}
         </div>
         <div className="col">
           <img
@@ -172,14 +183,20 @@ export const Demo = () => {
       <div className="details-container row">
         <div className="col">
           <p className="details-title">{item.name}</p>
-          {isFavorite == false ?
-          <button className="custom-button"
-                                onClick={() => {
-                                  actions.addFavorite(item.name, "/component/vehicle", params.index)}}
-          >
-            Add {item.name} To My Favorites
-          </button>
-          : null }
+          {isFavorite == false ? (
+            <button
+              className="custom-button"
+              onClick={() => {
+                actions.addFavorite(
+                  item.name,
+                  "/component/vehicle",
+                  params.index
+                );
+              }}
+            >
+              Add {item.name} To My Favorites
+            </button>
+          ) : null}
         </div>
         <div className="col">
           <img
