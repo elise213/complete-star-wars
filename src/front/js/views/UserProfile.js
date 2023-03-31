@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const userProfile = () => {
   const { store, actions } = useContext(Context);
-  let link = store.avatarImages[parseInt(store.avatarID)];
+  // let link = store.avatarImages[parseInt(store.avatarID)];
   let name = store.name;
   console.log("name is coming from user profile:" + name);
   let favorites = store.favorites;
@@ -18,7 +18,7 @@ const userProfile = () => {
   return (
     <div className="profile-container">
       {/* <div className=""> */}
-      <p className="yellow-text-title">{name}'s Favorites</p>
+      <p className="yellow-text-title">{name}'s favorites</p>
       <ul className="favorites-list" style={{ listStyleType: "none" }}>
         {store.favorites.map((fave, i) => {
           console.log("fave = ", fave);

@@ -73,6 +73,12 @@ export const Demo = () => {
     });
   }, [item]);
 
+  function handleClick(e, fave) {
+    e.preventDefault();
+    actions.removeFavorite(fave);
+    setIsFavorite(false);
+  }
+
   console.log(params);
   console.log(item);
   let fields =
@@ -92,11 +98,19 @@ export const Demo = () => {
                   "/component/person",
                   params.index
                 );
+                setIsFavorite(true);
               }}
             >
               Add {item.name} To My Favorites
             </button>
-          ) : null}
+          ) : (
+            <button
+              className="custom-button"
+              onClick={(e) => handleClick(e, item.name)}
+            >
+              Remove {item.name} From My Favorites
+            </button>
+          )}
         </div>
         <div className="col">
           <img
@@ -142,11 +156,19 @@ export const Demo = () => {
                   "/component/planet",
                   params.index
                 );
+                setIsFavorite(true);
               }}
             >
               Add {item.name} To My Favorites
             </button>
-          ) : null}
+          ) : (
+            <button
+              className="custom-button"
+              onClick={(e) => handleClick(e, item.name)}
+            >
+              Remove {item.name} From My Favorites
+            </button>
+          )}
         </div>
         <div className="col">
           <img
@@ -192,11 +214,19 @@ export const Demo = () => {
                   "/component/vehicle",
                   params.index
                 );
+                setIsFavorite(true);
               }}
             >
               Add {item.name} To My Favorites
             </button>
-          ) : null}
+          ) : (
+            <button
+              className="custom-button"
+              onClick={(e) => handleClick(e, item.name)}
+            >
+              Remove {item.name} From My Favorites
+            </button>
+          )}
         </div>
         <div className="col">
           <img
