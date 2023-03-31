@@ -84,7 +84,7 @@ export const Register = () => {
         >
           Register
         </button>
-        <Link className="back" to="/login">
+        <Link className="" to="/login">
           Back to Login
         </Link>
       </div>

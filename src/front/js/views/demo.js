@@ -96,7 +96,7 @@ export const Demo = () => {
               onClick={() => {
                 actions.addFavorite(
                   item.name,
-                  "/component/person",
+                  "/component/person/",
                   params.index
                 );
                 setIsFavorite(true);
@@ -154,7 +154,7 @@ export const Demo = () => {
               onClick={() => {
                 actions.addFavorite(
                   item.name,
-                  "/component/planet",
+                  "/component/planet/",
                   params.index
                 );
                 setIsFavorite(true);
@@ -212,7 +212,7 @@ export const Demo = () => {
               onClick={() => {
                 actions.addFavorite(
                   item.name,
-                  "/component/vehicle",
+                  "/component/vehicle/",
                   params.index
                 );
                 setIsFavorite(true);

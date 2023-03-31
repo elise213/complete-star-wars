@@ -91,7 +91,6 @@
   justify-content: space-between;
   align-items: end;
 }
-
 .back {
   color: black;
   text-decoration: none;
@@ -99,7 +98,6 @@
 .back:hover {
   color: lightgreen;
 }
-
 .custom-button {
   border: solid #ffe082;
   background-color: lightgreen;
