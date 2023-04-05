@@ -13,6 +13,7 @@ class User(db.Model):
     email = db.Column(db.String(256), unique=True, nullable=False)
     password = db.Column(db.String(256), unique=False, nullable=False)
     avatar = db.Column(db.String(80))
+    favorites = db.relationship("Favorites", backref='User', lazy=True )
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -30,7 +31,7 @@ class Favorites(db.Model):
     __tablename__ = 'Favorites'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256))
-    userId = db.Column(db.Integer, nullable=False)
+    userId = db.Column(db.Integer, ForeignKey("User.id"), nullable=False)
     typeURL=db.Column(db.String(256))
     index=db.Column(db.Integer)
     
